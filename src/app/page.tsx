@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import MoviesList from "@/components/movies-list";
 import { useEffect, useState } from "react";
@@ -7,13 +8,13 @@ export default function Home() {
   // I had to inject it as a script like this after 1 hour of looking for it or attempting to type it myself.
   
   const [scriptLoaded, setScriptLoaded] = useState(false);
-  const [scriptExports, setScriptExports] = useState(null);
+  const [_, setScriptExports] = useState(null);
 
   useEffect(() => {
     // Check if the script is already loaded
-    if (window.theMovieDb) {
+    if ((window as any).theMovieDb) {
       setScriptLoaded(true);
-      setScriptExports(window.theMovieDb);
+      setScriptExports((window as any).theMovieDb);
       return;
     }
 
@@ -25,7 +26,7 @@ export default function Home() {
     script.onload = () => {
       setScriptLoaded(true);
       // Assuming your script attaches something to window
-      setScriptExports(window.theMovieDb);
+      setScriptExports((window as any).theMovieDb);
     };
     
     script.onerror = () => {
@@ -43,7 +44,7 @@ export default function Home() {
     return <div>Loading script...</div>;
   }
 
-  window.theMovieDb.common.api_key = process.env.TMDB_API_KEY;
+  (window as any).theMovieDb.common.api_key = process.env.TMDB_API_KEY;
 
   return <MoviesList />;
 }

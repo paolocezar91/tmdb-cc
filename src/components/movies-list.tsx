@@ -5,17 +5,17 @@ import MovieSearch from "./movie-search";
 import MovieThumbnail from "./movie-thumbnail";
 import MoviesPaginator from "./movies-paginator";
 
-
 export default function MoviesList() {
 const { showModal } = useModal()
-const [movies, setMovies] = useState<string[]>([]);
+const [movies, setMovies] = useState<Record<string, string | number>[]>([]);
+const [moviesBackup, setMoviesBackup] = useState<Record<string, string | number>[]>([]);
 const [totalPages] = useState<number>(100);
 const [currentPage, setCurrentPage] = useState<number>(1);
-const [moviesBackup, setMoviesBackup] = useState<string[]>([]);
 
   useEffect(() => {
     const getMovies = () => {
-      theMovieDb.movies.getPopular({page: currentPage},
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (window as any).theMovieDb.movies.getPopular({page: currentPage},
         (data: string) => {
           const movies = JSON.parse(data)
           if (movies.results && movies.results.length > 0) {
@@ -34,7 +34,7 @@ const [moviesBackup, setMoviesBackup] = useState<string[]>([]);
   const doSearch = (term: string) => {
     if(term) {
       setMovies(movies.filter((movie) => {
-        return movie.title.toLowerCase().includes(term);
+        return String(movie.title).toLowerCase().includes(term);
       }));
     } else {
       setMovies(moviesBackup);

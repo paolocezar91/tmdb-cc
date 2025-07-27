@@ -8,6 +8,7 @@ export default function Home() {
   // I had to inject it as a script like this after 1 hour of looking for it or attempting to type it myself.
   
   const [scriptLoaded, setScriptLoaded] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, setScriptExports] = useState(null);
 
   useEffect(() => {

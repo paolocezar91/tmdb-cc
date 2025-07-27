@@ -1,16 +1,15 @@
 'use client';
 import { useEffect, useState } from "react";
-import MovieThumbnail from "./movie-thumbnail";
-import MovieSearch from "./movie-search";
-import MovieDetails from "./movie-details";
 import { useModal } from "./modal-provider";
+import MovieSearch from "./movie-search";
+import MovieThumbnail from "./movie-thumbnail";
 import MoviesPaginator from "./movies-paginator";
 
 
 export default function MoviesList() {
 const { showModal } = useModal()
 const [movies, setMovies] = useState<string[]>([]);
-const [totalPages, setTotalPages] = useState<number>(0);
+const [totalPages] = useState<number>(100);
 const [currentPage, setCurrentPage] = useState<number>(1);
 const [moviesBackup, setMoviesBackup] = useState<string[]>([]);
 
@@ -21,12 +20,10 @@ const [moviesBackup, setMoviesBackup] = useState<string[]>([]);
           const movies = JSON.parse(data)
           if (movies.results && movies.results.length > 0) {
             setMovies(movies.results)
-            setTotalPages(movies.total_pages);
             setMoviesBackup(movies.results);
           }
         }, 
         (error: string) => {
-          // do something with errorCallback
           console.error(error)
         })
     }

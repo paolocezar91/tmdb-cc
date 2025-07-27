@@ -1,4 +1,5 @@
 # TMDB Coding Challenge
+Thanks for reading this readme. This is a coding challenge for a job application for Senior React Developer.
 
 ## Getting Started
 
@@ -12,7 +13,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## .env file
 
-Use an .env file with this format
+Use an .env file with this format with the TMDB API key.
 ```
-TMDB_API_KEY="a74ca75b5531774d9b850116ae2e2391"
+TMDB_API_KEY="YOUR KEY"
 ```

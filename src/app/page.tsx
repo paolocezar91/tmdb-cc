@@ -3,6 +3,9 @@ import MoviesList from "@/components/movies-list";
 import { useEffect, useState } from "react";
 
 export default function Home() {
+  // Honestly I lost so much time with this. There's no (or at least I wasnt able to find one) typed lib for theMovieDB. 
+  // I had to inject it as a script like this after 1 hour of looking for it or attempting to type it myself.
+  
   const [scriptLoaded, setScriptLoaded] = useState(false);
   const [scriptExports, setScriptExports] = useState(null);
 
